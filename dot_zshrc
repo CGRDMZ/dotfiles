@@ -1,0 +1,10 @@
+export EDITOR=nvim
+
+alias vim="nvim"
+alias gs="git status"
+alias gp="git push"
+alias gl="git pull"
+
+source "$HOME/.cargo/env"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
