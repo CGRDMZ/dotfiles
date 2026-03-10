@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
-sudo apt install -y ca-certificates gnupg
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
 
+# Add Docker's GPG key
 sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
- | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+# Get codename without lsb_release
+. /etc/os-release
 
+# Add Docker repo
 echo \
- "deb [arch=$(dpkg --print-architecture) \
- signed-by=/etc/apt/keyrings/docker.gpg] \
- https://download.docker.com/linux/ubuntu \
- $(lsb_release -cs) stable" \
- | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $VERSION_CODENAME stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt update
-
-sudo apt install -y docker-ce docker-ce-cli containerd.io
-
-sudo usermod -aG docker $USER
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
