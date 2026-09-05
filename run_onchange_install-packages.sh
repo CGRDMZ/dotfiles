@@ -11,3 +11,6 @@ case "$(uname -s)" in
     sudo apt install -y git zsh tmux neovim fzf foot jq gh
     ;;
 esac
+
+command -v herdr >/dev/null || curl -fsSL https://herdr.dev/install.sh | sh
+herdr integration install claude
