@@ -5,6 +5,6 @@ alias gs="git status"
 alias gp="git push"
 alias gl="git pull"
 
-source "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
